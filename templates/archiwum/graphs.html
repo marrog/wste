@@ -1,0 +1,26 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}  Dokumenty{%endblock%}
+{% block content %}
+<div id="documents">
+{% for document in documents.object_list %}
+    <li><h3><a href="/documents/{{document.id}}">{{document.title}}</a></h3>
+    <p>{{document.description }}</p></li>
+    
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if documents.has_previous %}
+            <a href="?page={{ documents.previous_page_number }}&search_text=">Poprzednia</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ documents.number }} z {{ documents.paginator.num_pages }}.
+        </span>
+
+        {% if documents.has_next %}
+            <a href="?page={{ documents.next_page_number }}&search_text=">Następna</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "archiwum/layout.html" %}
+{% block title %}Grupy studenckie{%endblock%}
+{% block content %}
+<div id="content">
+<h1>Grupy studenckie (alfabetycznie, wg nazwy):</h1>
+</div>
+{% for g in groups %}
+<div id="news"><b>{{g.name|capfirst|linebreaks}}</b><br><br><b>Opis:</b> {{g.notes|urlize|linebreaks}}<br><br><h2><b>Założono:</b>{{g.pub_date|date:"d.m.Y"}} | 
+<a href="{% url archiwum.views.students_by_group g.slug %}">Studenci ({{g.student_set.all.count}})</a></h2>
+</div>
+{% empty %}
+<div id="emptylist">Brak grup studenckich!</div>
+{% endfor %}
+{% endblock %}

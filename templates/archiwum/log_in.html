@@ -1,0 +1,19 @@
+{% extends "archiwum/layout.html" %}
+{% block title %}Zaloguj{%endblock%}
+{% block content %}
+<div id="content">
+    <p>
+    <h1>Logowanie</h1></p>
+    <p><span>Musisz się zalogować, aby móc korzystać z archiwum</span>
+    </p>
+    {% if form.errors %}
+    <p><div id="emptylist">Popraw błędy! Sprawdź, może masz aktywny Caps-Lock!</div></p>
+    {% endif %}
+    <form method="post" action="{% url archiwum.views.log_in %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Zaloguj" />
+    </form>
+    </p>
+</div>
+{%endblock%}

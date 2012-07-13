@@ -1,0 +1,30 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block content %}
+<h1>Wypełnij formularz znajdujący się poniżej aby dodać dokument do archiwum.</h1>
+<div id=formularze>
+<form enctype=”multipart/form-data” method="post" action="">{% csrf_token %}
+<!--<dl>
+<dt><label for="id_dok">{{form.dok.label}}</label></dt>
+{{form.dok.errors}}
+<dd>{{ form.dok }}</dd>
+<dt><label for="id_public">{{form.public.label}}</label></dt>
+{{form.public.errors}}
+<dd>{{ form.public }}</dd>
+<dt><label for="id_category">{{form.category.label}}</label></dt>
+{{form.category.errors}}
+<dd>{{ form.category }}</dd>
+<dt><label for="id_typ">{{form.typ.label}}</label></dt>
+{{form.typ.errors}}
+<dd>{{ form.typ }}</dd>
+<dt><label for="id_title">{{form.title.label}}</label></dt>
+{{form.title.errors}}
+<dd>{{ form.title }}</dd>
+<dt><label for="id_description">{{form.description.label}}</label></dt>
+{{form.description.errors}}
+<dd>{{ form.description }}</dd>
+</dl>-->
+<table>{{form}}</table>
+<input type="submit" value="Dodaj dokument" />
+</form>
+</div>
+{% endblock %}

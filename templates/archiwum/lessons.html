@@ -1,0 +1,29 @@
+{% extends "archiwum/layout.html" %}
+{% block title %} Lista wykładów{%endblock%}
+{% block content %}
+<form id="searchform" action="" method="get">
+<input type="text" name="search_text" />
+<input type="submit" value="Szukaj"/>
+</form>
+<div id="lessons">
+{% for lesson in lessons_list %}
+    <h3>Temat lekcji: <a href="/lessons/{{lesson.id}}">{{lesson.name}}</a></h3>
+    <p>Dział: {{lesson.subject}}</p>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if documents.has_previous %}
+            <a href="?page={{ documents.previous_page_number }}&search_text=">Poprzednia</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ documents.number }} z {{ documents.paginator.num_pages }}.
+        </span>
+
+        {% if documents.has_next %}
+            <a href="?page={{ documents.next_page_number }}&search_text=">Następna</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

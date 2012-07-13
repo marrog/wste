@@ -1,0 +1,128 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Instruktorzy | {{instructor.prefix}} {{instructor.first_name}} {{instructor.second_name}} {{instructor.surname}}{% endblock %}
+{% block content %}
+{% if user_group == 'pracownik dziekanatu' or user_group == 'Administrator' %}
+<br>
+<p>Jako <a href="/info/"><b>Administrator</b></a> lub <a href="/info/"><b>Pracownik dziekanatu</b></a> masz dostęp do wszystkich informacji
+ o instruktorach.<br>
+ <a href="/info/"><b>Studenci</b></a> i <a href="/info/"><b>Instruktorzy</b></a> mają dostęp tylko do wybranych informacji.</p>
+<TD width="600" bgcolor="white" align="left" valign="top">
+<p align="center"><b><font size="5">Dane Instruktora:<br></font></b>
+{% if instructor.photo %}<img src="/statics/{{instructor.photo}}" alt="" style="width: 3cm; height: 4cm;"/>
+{% else %}<img src="/statics/photo/default.jpg" alt="" style="width: 3cm; height: 4cm;"/>
+{% endif %}
+<div align="center">
+    <center>
+    <table border="1" width="600" cellpadding="0">
+    <tr>
+    <td width="200" align="center"><b>Imię:</b></td>
+    <td width="400" align="center"><b>{{instructor.first_name|capfirst}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Drugie imię (jeśli jest):</b></td>
+    <td width="400" align="center"><b>{{instructor.second_name|capfirst|default:"brak"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nazwisko:</b></td>
+    <td width="400" align="center"><b>{{instructor.surname|capfirst}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Tytuł naukowy:</b></td>
+    <td width="400" align="center"><b>{{instructor.prefix|lower}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Życiorys:</b></td>
+    <td width="400" align="center"><b>{% if instructor.curriculum_vitae %}<a href="{{instructor.curriculum_vitae.url}}">Otwórz</a>{% else %} brak {% endif %}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Prowadzone przedmioty:</b></td>
+    <td width="400" align="center"><b>{%for przedmiot in instructor.subjects.all%}{{przedmiot.title|capfirst}}{%if not forloop.last%}, {%endif%}{%empty%}brak{%endfor%}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Adres e-mail:</b></td>
+    <td width="400" align="center"><b>{% if instructor.email %}<a href="mailto:{{instructor.email}}?subject=WSTE">{{instructor.email|lower}}{% else %}nie podano{% endif %}</a></b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nr telefonu:</b></td>
+    <td width="400" align="center"><b>{{instructor.phone|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nr PESEL:</b></td>
+    <td width="400" align="center"><b>{{instructor.pesel|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nr konta bankowego:</b></td>
+    <td width="400" align="center"><b>{{instructor.account|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Data urodz.:</b></td>
+    <td width="400" align="center"><b>{{instructor.birth_date|date:"d.m.Y"|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Adres:</b></td>
+    <td width="400" align="center"><b>{{instructor.adress|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Data dodania:</b></td>
+    <td width="400" align="center"><b>{{instructor.issued_on|date:"d.m.Y"}}</b></td>
+    </tr>
+	    <tr>
+    <td width="200" align="center"><b>Dostęp do panelu administracyjnego:</b></td>
+    <td width="400" align="center"><b>{% if instructor.user.is_staff %}Tak{%else%}Nie{%endif%}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Wybrane publikacje (maks.3):</b></td>
+    <td width="400" align="center">{%if instructor.publication1%}<a href="{{instructor.publication1.url}}">publikacja1</a>{%else%}{%endif%}  
+	 {%if instructor.publication2%}<a href="{{instructor.publication2.url}}">publikacja2</a>{%else%}{%endif%} {%if instructor.publication3%}
+	<a href="{{instructor.publication3.url}}">publikacja3</a>{%else%}{%endif%}</td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Dodatkowe uwagi:</b></td>
+    <td width="400" align="center"><b>{{instructor.description|default:"brak"}}</b></td>
+    </tr>
+
+
+</div>
+	
+{% else %}
+<br>
+<p><b>Uwaga!!! Tylko pracownicy dziekanatu mają dostęp do wszystkich informacji o instruktorach. Instruktorzy i studenci mają dostęp tylko do wybranych informacji.</b></p><br>
+<TD width="600" bgcolor="white" align="left" valign="top">
+<p align="center"><b><font size="5">Dane Instruktora:<br></font></b>
+{% if instructor.photo %}<img src="/statics/{{instructor.photo}}" alt="" style="width: 3cm; height: 4cm;"/>
+{% else %}<img src="/statics/photo/default.jpg" alt="" style="width: 3cm; height: 4cm;"/>
+{% endif %}
+<div align="center">
+    <center>
+    <table border="1" width="600" cellpadding="0">
+    <tr>
+    <td width="200" align="center"><b>Imię:</b></td>
+    <td width="400" align="center"><b>{{instructor.first_name|capfirst}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Drugie imię (jeśli jest):</b></td>
+    <td width="400" align="center"><b>{{instructor.second_name|capfirst|default:"brak"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nazwisko:</b></td>
+    <td width="400" align="center"><b>{{instructor.surname|capfirst}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center"><b>Tytuł naukowy:</b></td>
+    <td width="400" align="center"><b>{{instructor.prefix|lower}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Prowadzone przedmioty:</b></td>
+    <td width="400" align="center"><b>{%for przedmiot in instructor.subjects.all%}{{przedmiot.title|capfirst}}{%if not forloop.last%}, {%endif%}{%empty%}brak{%endfor%}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Adres e-mail:</b></td>
+    <td width="400" align="center"><b>{% if instructor.email %}<a href="mailto:{{instructor.email}}?subject=WSTE">{{instructor.email|lower}}{% else %}nie podano{% endif %}</a></b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center"><b>Nr telefonu:</b></td>
+    <td width="400" align="center"><b>{{instructor.phone|default:"nie podano"}}</b></td>
+    </tr>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "archiwum/layout.html" %}
+{% block title %} Lista instruktorów{%endblock%}
+{% block content %}
+<div id="content">
+<h1>Lista instruktorów (alfabetycznie, wg nazwiska):</h1><br>
+<ul>
+{% for instructor in instructors %}
+    <li>{{instructor.prefix}} <a href="/users/list/instructors/{{instructor.id}}">{{instructor.first_name}} {{instructor.second_name}} {{instructor.surname}}</a></li>
+{% empty %}
+<div id="emptylist">Brak pozycji na liście!</div>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}

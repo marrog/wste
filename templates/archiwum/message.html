@@ -1,0 +1,8 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Operacja niedozwolona!{%endblock%}
+{%block content%}
+<div id="content">
+	<div id="emptylist"><h1>{{ warning }}</h1></div><br>
+    <a href="{% url archiwum.views.main_index %}">Powrót do strony głównej</a>
+</div>
+{%endblock%}

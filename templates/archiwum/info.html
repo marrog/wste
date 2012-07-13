@@ -1,0 +1,23 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Archiwum dokumentów | Informacje{%endblock%}
+{% block content %}
+<div id="info">
+<h1>INFORMACJE O UPRAWNIENIACH UŻYTKOWNIKÓW:</h1><br>
+<h1>STUDENT:</h1>
+<p>Konto studenta umożliwia dostęp do wybranych elementów archiwum takich jak: wybrane informacje osobowe o studentach i instruktorach.
+Możliwe jest również przeglądanie udostępnionych studentom dokumentów i zamieszczanych dla studentów wiadomości od instruktorów bądź też z dziekanatu.
+Studenci nie mają możliwości dodawania, edycji i usuwania jakichkolwiek elementów w archiwum.</p><br>
+<h1>INSTRUKTOR:</h1>
+<p>Konto instruktora zapewnia wszystkie uprawnienia konta kategorii STUDENT a także dodawanie do archiwum własnych dokumentów i wiadomości dla innych 
+użytkowników. </p><br>
+<h1>PRACOWNIK DZIEKANATU:</h1>
+<p>Konto pracownika dziekanatu zapewnia największe uprawnienia. Możliwa jest ingerencja wśród elementów archiwum 
+poprzez <a href="/admin/">Panel administracyjny</a>.</p>
+<br>
+<h1>UWAGA!!!</h1>
+
+<p>Za działanie serwisu, przydzielanie uprawnień i inne ustawienia odpowiada administrator. W przypadku pytań, uwag i innych problemów 
+w trakcie pracy w archiwum proszę kliknąć aby wysyłać wiadomość do <a href="mailto:{{mailadmin|last}}?subject=WSTE - Archiwum">Administratora: ({{mailadmin|first}})</a>.
+lub skorzystać z <a href="{% url archiwum.views.send_email %}">formularza</a>.</p>
+</div>
+{% endblock %}

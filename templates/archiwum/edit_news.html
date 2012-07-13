@@ -1,0 +1,19 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block content %}
+<h1>W celu zmiany wiadomości edytuj poniższy formularz:</h1>
+<div id=formularze>
+<form method="post" action="">{% csrf_token %}
+<dl>
+<dt><label for="id_public">Opublikuj dla</label></dt>
+<dd>{{ form.public }}</dd>
+<dt><label for="id_title">Tytuł wiadomości</label></dt>
+<dd>{{ form.title }}</dd>
+<dt><label for="id_text">Treść</label></dt>
+<dd>{{ form.text }}</dd>
+</dl>
+<input type="submit" value="zapisz" />
+<input type=submit name='delete' value="usuń wiadomość" />
+<input type=submit name='cancel' value="anuluj" />
+</form>
+</div>
+{% endblock %}

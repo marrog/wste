@@ -1,0 +1,21 @@
+<!-- nawigacja -->
+{% if not do_not_show_nav %}
+<div id="nav">
+{% if user.is_authenticated %}
+<p>Witaj <strong>{{ user.username }}.</strong></p>
+<p><a href="{% url archiwum.views.log_out %}">Wyloguj się</a></p>
+<a href="{% url archiwum.views.list_users %}">Lista studentów</a> | 
+<a href="{% url archiwum.views.list_instructors %}">Lista instruktorów</a> |
+<a href="{% url archiwum.views.list_groups %}">Grupy</a> |
+<a href="{% url archiwum.views.my_newses %}">Moje wiadomości</a> |
+<a href="{% url archiwum.views.info %}">Pomoc</a>
+<p>Twoja kategoria to <b>{{ user_group }}</b></p>
+	    <!--<p id="user_actions">-->
+	    	<!--<ul>-->
+	    	<!--</ul>-->
+	    </p>
+{% else %}
+<p>Jesteś nie zalogowany. <a href="{% url archiwum.views.log_in %}">Zaloguj się</a>,</p>
+{% endif %}    
+</div>
+{%endif%}

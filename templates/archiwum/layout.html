@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+	<link href='{{ MEDIA_URL }}css/style.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" />
+        <meta charset="utf-8">
+	<title>{% block title %}Archiwum dokumentów{% endblock %}</title>
+    </head>
+    <body>
+    <div id="logo">
+	{% if not do_not_show_nav %}	
+	    <a href="{%url archiwum.views.main_index%}">Strona główna</a> | 
+		<a href="/admin/">Panel administratora z posiadanymi uprawnieniami</a>
+	{%endif%}
+    </div>
+	{% include 'archiwum/nav.html' %}
+	
+	{% block content %}{% endblock %}
+    </body>
+</html>

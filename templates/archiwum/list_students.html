@@ -1,0 +1,34 @@
+{% extends "archiwum/layout.html" %}
+{% block title %} Lista wszystkich studentów{%endblock%}
+{% block content %}
+<br>
+<div id="leftpanel">
+<p><b>Studenci wg semestrów: {% for s in semestr %}<p><a href="/users/list/students/semestr/{{s.slug}}">{{s.number}}</a>{%if not forloop.last%}, {%endif%}</p>{% empty %}<div id="emptylist">Nie określono żadnych semestrów!</div>{% endfor %}</b></p>
+<p><b>Studenci wg grup: {% for g in grupa %}<ul><a href="/users/list/students/groups/{{g.slug}}">{{g.name}}</a>{%if not forloop.last%}, {%endif%}</ul>{% empty %}<div id="emptylist">Nie utworzono żadnych grup!</div>{% endfor %} </b></p>
+</div>
+<div id="content">
+<h1>Lista wszystkich studentów w archiwum (rosnąco wg nr indeksu):</h1>
+<ul>
+{% for student in students.object_list %}
+<li><a href="/users/list/students/{{student.id}}">{{student.indeks}} {{student.first_name|capfirst}} {{student.second_name|capfirst}} {{student.surname|capfirst}}</a></li>
+{% empty %}
+<div id="emptylist">Brak pozycji na liście!</div>
+{% endfor %}
+</ul>
+<div class="pagination">
+    <span class="step-links">
+        {% if students.has_previous %}
+            <a href="?page={{ students.previous_page_number }}">poprzednie</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ students.number }} z {{ students.paginator.num_pages }}.
+        </span>
+
+        {% if students.has_next %}
+            <a href="?page={{ students.next_page_number }}">następne</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

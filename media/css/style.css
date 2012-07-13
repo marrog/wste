@@ -1,0 +1,344 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+    background-color: #DBDAD7;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+
+/* change colours to suit your needs */
+mark {
+    background-color:#ff9;
+    color:#000; 
+    font-style:italic;
+    font-weight:bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* change border colour to suit your needs */
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+input, select {
+    vertical-align:middle;
+}
+
+/* End of reset */
+
+#logo{
+    background-color: #52a8fd;
+    height: 40px;
+    display: block;
+}
+#logo a {
+    text-decoration:none;
+    color: black;
+    font-weight: bold;
+}
+
+#nav {
+	font-family: 'Georgia', ;
+	background-color: #52a8fd;
+	height: 80px;
+	line-height: 20px;
+	font-size: 12px;
+	padding: 5px;
+	/*Cień dla kilku przeglądarek przynajmniej	*/
+	-webkit-box-shadow: 3px 3px 4px #000;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+#newses {
+	display: block;
+	width: 1000px;
+	padding: 20px;
+	float: left;
+	margin: 0;
+	margin-left:50px;
+}
+#news  {
+	background-color: #FFF;
+	margin: 50px;
+	margin-left: 40px;
+	/*width: 1000px;*/
+	padding: 20px;
+}
+#news h2 {
+    color: gray;
+	font-size: small;
+	padding: 20px;
+    }
+#leftpanel {
+    margin-left:20px;
+	}
+	
+#lessons{
+    display:block;
+    width: 350px;
+    padding:20px;
+    float: left;
+    margin: 0;
+    margin-left:100px;
+    }
+#lesson {
+    padding: 20px;
+    }
+
+span.news_date  {
+	font-size: 9px;
+	color: gray;
+}
+.pagination {
+	font-weight: bold;
+	padding-top: 10px;
+}
+
+#sidebar {
+	font-family: arial, sans;
+	display: block;
+	float: right;
+	margin: 0px;
+	margin-left:100px;
+	width: 300px;
+	padding: 10px;
+}
+
+#sidebar h3 {
+    font-size: 18px;
+    text-decoration:underline;
+    
+}
+#sidebar ul {
+    list-style: none;
+}
+#sidebar li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#sidebar a {
+    color: black;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    }
+    
+.cleaner { clear: both;}
+#document {
+    display: block;
+    padding: 20px;
+	width: 400px;
+}
+.author {
+/*     background-color: gray;
+ */    
+    color: blue;
+}
+#document p {
+    padding: 10px;
+	width: 800px;
+}
+.no_action{
+    font-size: 10px;
+    color: gray;
+}   
+.date  {
+	font-size: 11px;
+	color: black;
+}
+#lesson h3 , #lesson p{
+    padding:5px;
+}
+
+#lesson ul {
+    padding-left: 40px;
+    list-style:  circle;
+}
+.postscript{
+	font-size: 9px;
+	color: gray;
+}
+.form_error {
+    background-color: red;
+}
+
+.action_list img {
+    /*width: 60px;
+*/    
+    }
+.action_list {
+    list-style: none;
+    }
+.action_list li {
+    padding: 10px;
+    }
+.action_list p {
+    font-size: 10px;
+    }
+#actions {
+    float: left;
+    width: 350px;
+    padding: 10px;
+    }
+.action_list img {
+    height: 30px;
+    }
+.action_list a {
+    font-family: Helvetica,Arial,sans-serif;
+    color: black;
+    font-size: 16px;
+    text-decoration: none;
+    }
+#documents {
+    float: left;
+    width: 800px;
+    padding: 20px;
+}
+.categories ul {
+    list-style: none;
+}
+#content {
+    font-family: arial, sans;
+    /*float: left;*/
+    width: 600px;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 20px;
+    margin: auto;
+    }
+#content li {
+    padding: 20px;
+}
+#header {
+	font-family: Helvetica,Arial,sans-serif;
+	background-color: #52a8fd;
+	height: 90px;
+	line-height: 25px;
+	font-size: 14px;
+	padding: 5px;
+	/*Cień dla kilku przeglądarek przynajmniej	*/
+	-webkit-box-shadow: 3px 3px 4px #000;
+	-moz-box-shadow: 3px 3px 4px #000;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+#content_admin {
+    font-family: arial;
+    font-size: 14px;
+    margin: 10px 15px;
+}
+#emptylist {
+    display: inline;
+    color: red;
+}
+#formularze {
+    border-right: #9B0000 1px solid;
+    border-top: #9B0000 1px solid;
+    border-bottom: #9B0000 1px solid;
+    border-left: #9B0000 1px solid;
+    width: 860px;
+    margin: 30px;
+    padding: 15px;
+    font-family: Helvetica,Arial,sans-serif;
+    text-align: left;
+    font-size: 12px;
+    float: left;
+    margin-bottom: 8px;
+}
+#info {
+	background-color: #FFF;
+	margin: 50px;
+	}
+#main_index_ost_dod {
+	font-family: Helvetica,Arial,sans-serif;
+	background-color: #FFF;
+	display: block;
+	float: left;
+	margin: 0px;
+	margin-left:60px;
+	width: 400px;
+	padding: 20px;
+}
+#not_auth {
+	background-color: #52a8fd;
+	font-size: 10px;
+}
+#add_doc {
+	margin-left: 80px;
+}
+

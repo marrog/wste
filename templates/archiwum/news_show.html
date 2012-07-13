@@ -1,0 +1,63 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Wiadomości | {{news.title}}{%endblock%}
+{% block content %}
+
+{% if user_group == 'student' %}
+	<div id="news">
+	{% if news.author == user or news.public == 'wszystkich' or news.public == 'studentów' %}
+	<h3>{{news.title|urlize|linebreaks}}</h3>
+	<br>
+	{{news.text|escape|urlize|linebreaks}}
+	<h2>Dodano: {{news.pub_date|date:"d.m.Y"}} o godz. {{news.pub_date|date:"H:i"}}</h2>
+	<h2>Autor: {{news.author.first_name}} {{news.author.last_name}} {{news.author}}</h2>
+	<h2>Status: wiadomość dla {{news.public}}</h2>
+	<br>
+	{% ifequal news.author user %}
+	<a href="/archiwum/news/{{news.id}}/edit">Edytuj</a>
+	{% endifequal %}
+	{% else %}
+	<div id="emptylist">Wiadomość ma status:<b>dla {{news.public}}</b>. Studenci nie mają dostępu do tej wiadomości!</div>
+	{% endif %}
+	</div>
+{% else %}
+{% if user_group == 'instruktor' %}
+	<div id="news">
+	{% if news.author == user or news.public == 'wszystkich' or news.public == 'instruktorów' %}
+	<h3>{{news.title|urlize|linebreaks}}</h3>
+	<br>
+	{{news.text|escape|urlize|linebreaks}}
+	<h2>Dodano: {{news.pub_date|date:"d.m.Y"}} o godz. {{news.pub_date|date:"H:i"}}</h2>
+	<h2>Autor: {{news.author.first_name}} {{news.author.last_name}} {{news.author}}</h2>
+	<h2>Status: wiadomość dla {{news.public}}</h2>
+	<br>
+	{% ifequal news.author user %}
+	<a href="/archiwum/news/{{news.id}}/edit">Edytuj</a>
+	{% endifequal %}
+	{% else %}
+	<div id="emptylist">Wiadomość ma status:<b>dla {{news.public}}</b>. Instruktorzy nie mają dostępu do tej wiadomości!</div>
+	{% endif %}
+	</div>
+{% else %}
+{% if user_group == 'pracownik dziekanatu' %}
+	<div id="news">
+	{% if news.author == user or news.public == 'wszystkich' or news.public == 'dziekanatu' %}
+	<h3>{{news.title|urlize|linebreaks}}</h3>
+	<br>
+	{{news.text|escape|urlize|linebreaks}}
+	<h2>Dodano: {{news.pub_date|date:"d.m.Y"}} o godz. {{news.pub_date|date:"H:i"}}</h2>
+	<h2>Autor: {{news.author.first_name}} {{news.author.last_name}} {{news.author}}</h2>
+	<h2>Status: wiadomość dla {{news.public}}</h2>
+	<br>
+	{% ifequal news.author user %}
+	<a href="/archiwum/news/{{news.id}}/edit">Edytuj</a>
+	{% endifequal %}
+	{% else %}
+	<div id="emptylist">Wiadomość ma status:<b>dla {{news.public}}</b>. Pracownicy dziekanatu nie mają dostępu do tej wiadomości!</div>
+	{% endif %}
+	</div>
+{% else %}
+	<div id="news">
+	<div id="emptylist">Wiadomość ma status:<b>dla {{news.public}}</b>. Nie masz przydzielonej grupy! Brak dostępu!</div>
+	</div>
+{% endif %}{% endif %}{% endif %}
+{% endblock %}

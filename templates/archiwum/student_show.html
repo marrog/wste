@@ -1,0 +1,143 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Studenci | {{student.indeks}} {{student.first_name}} {{student.surname}}{% endblock %}
+{% block content %}
+{% if user_group == 'pracownik dziekanatu' or user_group == 'Administrator' or user_group == 'instruktor' %}
+<br>
+<p>Jako <a href="/info/"><b>Administrator</b></a>, <a href="/info/"><b>Pracownik dziekanatu</b></a> lub <a href="/info/"><b>Instruktor</b></a>
+ masz dostęp do pełnej informacji o studentach. <a href="/info/"><b>Studenci</b></a> mają dostęp jedynie do wybranych informacji.</p>
+ 
+ <!-- początek tabeli -->
+<TD width="600" bgcolor="white" align="left" valign="top">
+<p align="center"><b><font size="5">Dane Studenta:<br></font></b>
+{% if student.photo %}<img src="/statics/{{student.photo}}" alt="" style="width: 3cm; height: 4cm;/>
+{% else %}<img src="/statics/photo/default.jpg" alt="" style="width: 3cm; height: 4cm;/>
+{% endif %}
+<div align="center">
+    <center>
+    <table border="1" width="600" cellpadding="0">
+    <tr>
+    <td width="200" align="center">Nr indeksu:</td>
+    <td width="400" align="center"><b>{{student.indeks}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center">Imię:</td>
+    <td width="400" align="center"><b>{{student.first_name|capfirst}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Drugie imię:</td>
+    <td width="400" align="center"><b>{{student.second_name|capfirst|default:"nie podano"}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center">Nazwisko:</td>
+    <td width="400" align="center"><b>{{student.surname|capfirst}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Kierunek studiów:</td>
+    <td width="400" align="center"><b>{{student.get_study_display}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Wybrana specjalizacja:</td>
+    <td width="400" align="center"><b>{{student.get_specialization_display|default:"nie wybrano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Semestr:</td>
+    <td width="400" align="center"><b>{{student.semestr}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Przypisane grupy:</td>
+    <td width="400" align="center"><b>{% for x in student.group.all %}<a href="/users/list/students/groups/{{x.slug}}">{{x.name}}</a>{%if not forloop.last%}, {%endif%}{% empty %}nie przypisano{% endfor %}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Data urodz.:</td>
+    <td width="400" align="center"><b>{{student.birth_date|date:"d.m.Y"|default:"nie podano"}} ({{student.birth_date|timesince}})</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Adres:</td>
+    <td width="400" align="center"><b>{{student.adress|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Nr telefonu:</td>
+    <td width="400" align="center"><b>{{student.phone|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Adres e-mail:</td>
+    <td width="400" align="center"><b>{% if student.email %}<a href="mailto:{{student.email}}?subject=WSTE">{{student.email|lower}}{% else %}nie podano{% endif %}</a></b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">PESEL:</td>
+    <td width="400" align="center"><b>{{student.pesel|default:"nie podano"}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center">Nr konta bankowego:</td>
+    <td width="400" align="center"><b>{{student.account|default:"nie podano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Data dodania:</td>
+    <td width="400" align="center"><b>{{student.issued_on|date:"d.m.Y"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Dodatkowe uwagi:</td>
+    <td width="400" align="center"><b>{{student.description|urlize|default:"brak"}}</b></td>
+    </tr>
+</div>
+<!-- koniec tabeli -->
+
+{% else %}
+<br>
+<p>Tylko <a href="/info/"><b>Administrator</b></a>, <a href="/info/"><b>Pracownik dziekanatu</b></a> lub <a href="/info/"><b>Instruktor</b></a> ma dostęp
+ do wszystkich danych. Jako <a href="/info/"><b>Student</b></a> masz dostęp jedynie do wybranych informacji.</p>
+ 
+ <!-- początek tabeli -->
+<TD width="600" bgcolor="white" align="left" valign="top">
+<p align="center"><b><font size="5">Dane Studenta:<br></font></b>
+{% if student.photo %}<img src="/statics/{{student.photo}}" alt="" style="width: 3cm; height: 4cm;/>
+{% else %}<img src="/statics/photo/default.jpg" alt="" style="width: 3cm; height: 4cm;/>
+{% endif %}
+<div align="center">
+    <center>
+    <table border="1" width="600" cellpadding="0">
+    <tr>
+    <td width="200" align="center">Nr indeksu:</td>
+    <td width="400" align="center"><b>{{student.indeks}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center">Imię:</td>
+    <td width="400" align="center"><b>{{student.first_name|capfirst}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Drugie imię:</td>
+    <td width="400" align="center"><b>{{student.second_name|capfirst|default:"nie podano"}}</b></td>
+    </tr>
+    <tr>
+    <td width="200" align="center">Nazwisko:</td>
+    <td width="400" align="center"><b>{{student.surname|capfirst}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Kierunek studiów:</td>
+    <td width="400" align="center"><b>{{student.get_study_display}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Wybrana specjalizacja:</td>
+    <td width="400" align="center"><b>{{student.get_specialization_display|default:"nie wybrano"}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Semestr:</td>
+    <td width="400" align="center"><b>{{student.semestr}}</b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Przypisane grupy:</td>
+    <td width="400" align="center">{% for x in student.group.all %}<b><a href="/users/list/students/groups/{{x.slug}}">{{x.name}}</a>{%if not forloop.last%}, {%endif%}</b>{% empty %}nie przypisano{% endfor %}</td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Adres e-mail:</td>
+    <td width="400" align="center"><b>{% if student.email %}<a href="mailto:{{student.email}}?subject=WSTE">{{student.email|lower}}{% else %}nie podano{% endif %}</a></b></td>
+    </tr>
+	<tr>
+    <td width="200" align="center">Data dodania:</td>
+    <td width="400" align="center"><b>{{student.issued_on|date:"d.m.Y"}}</b></td>
+    </tr>
+</div>
+<!-- koniec tabeli -->
+
+{% endif %}
+{% endblock %}

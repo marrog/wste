@@ -1,0 +1,175 @@
+{% extends "archiwum/layout.html" %}
+{% block title %}Archiwum dokumentów | Strona główna{%endblock%}
+{% block content %}
+<!-- for debug start-->
+{% if user_group == 'student' %}
+<div id="content">
+<div id="actions">
+    <ul class="action_list">
+	    
+        <li><a href="{%url archiwum.views.documents%}">Przeglądaj dokumenty</a>
+	<a href="{%url archiwum.views.documents%}"><img src="{{ MEDIA_URL }}images/search_document.png" alt="Przeglądaj dokumenty"/></a></li>
+	<li><a href="{%url archiwum.views.search_documents%}">Wyszukuj dokumenty</a>
+	<a href="{%url archiwum.views.search_documents%}">
+	<img src="{{ MEDIA_URL }}images/search_document.png"
+	alt="Wyszukuj dokumenty"/></a></li>
+	
+        <li><a href="{%url archiwum.views.newses%}">Przeglądaj i wyszukuj wiadomości</a>
+	<a href="{%url archiwum.views.newses%}">
+            <img src="{{ MEDIA_URL}}images/search_news.png"
+                alt="Przeglądaj i wyszukuj wiadomości" /></a></li>
+            
+    </ul>
+</div>
+</div>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze dokumenty</h1>
+	{%for document in documents%}Dla {{document.public.name}}
+	<p><a href="/documents/{{document.id}}">{{ document.title|linebreaks }}</a></p>
+	<p>Dodany {{document.issued_on|date:"d.m.Y"}} o godz.: {{document.issued_on|date:"H:i"}} przez <b>{{document.author.first_name}} {{document.author.last_name}} {{document.author}}</b></p>
+	{%empty%}
+	<p>Brak pozycji na liście</p>
+	{%endfor%}
+</div>
+<br>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze wiadomości</h1>
+
+{%for n in news%}
+{% if n.public == 'studentów' or n.public == 'wszystkich' or n.author == user %}
+	<p><a href="archiwum/news/{{n.id}}">{{n.title|linebreaks}}</a></p>
+	<p>Dodana {{n.pub_date|date:"d.m.Y"}} o godz.: {{n.pub_date|date:"H:i"}} przez <b>{{n.author.user.first_name}}{{n.author.last_name}} {{n.author}}</b></p>
+{% endif %}
+{%empty%}
+	<p>Brak pozycji na liście</p>
+{%endfor%}
+</div>
+{% else %}
+{% if user_group == 'instruktor' %}
+<div id="content">
+<div id="actions">
+    <ul class="action_list">
+	<li>
+	    <a href="{%url archiwum.views.search_documents%}">Wyszukuj dokumenty</a>
+	        <a href="{%url archiwum.views.search_documents%}"><img src="{{ MEDIA_URL }}images/search_document.png"
+	    alt="Wyszukuj dokumenty"/></a></li>
+	<li>
+	    <a href="{%url archiwum.views.documents%}">Przeglądaj dokumenty</a>
+	        <a href="{%url archiwum.views.documents%}"><img src="{{  MEDIA_URL }}images/search_document.png" 
+                alt="Przeglądaj dokumenty"/></a></li>
+        <li>
+		<a href="{%url archiwum.views.newses%}">Przeglądaj i wyszukuj wiadomości</a>
+            <a href="{%url archiwum.views.newses%}"><img src="{{ MEDIA_URL}}images/search_news.png"
+                alt="Przeglądaj i wyszukuj wiadomości" /></a></li>
+	<li>
+		<a href="{%url archiwum.views.graphs%}">Plany zajęć</a>
+            <a href="{%url archiwum.views.graphs%}"><img src="{{ MEDIA_URL}}images/search_document.png"
+                alt="Plany zajęć" /></a></li>
+	<li>	
+            <a href="/archiwum/document/add/">Dodaj dokument</a>
+            <a href="/archiwum/document/add"><img src="{{ MEDIA_URL }}images/add_document.png"
+                alt="Dodaj dokument" /></a></li>
+	<li>
+	    <a href="/archiwum/news/add">Dodaj wiadomość</a>
+            <a href="/archiwum/news/add"><img src="{{ MEDIA_URL }}images/add_news.png"
+		alt="Dodaj wiadomość" /></a></li>
+    </ul>
+</div>
+</div>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze dokumenty</h1>
+	{%for document in documents%} Dla {{document.public.name}}
+	<p><a href="/documents/{{document.id}}">{{document.title|linebreaks}}</a></p>
+	<p>Dodany {{document.issued_on|date:"d.m.Y"}} o godz.: {{document.issued_on|date:"H:i"}} przez <b>{{document.author.first_name}} {{document.author.last_name}} {{document.author}}</b></p>
+	{%empty%}
+	<div id="emptylist"><p>Brak pozycji na liście</p></div>
+	{%endfor%}
+</div>
+<br>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze wiadomości</h1>
+{%for n in news%}
+{% if n.public == 'instruktorów' or n.public == 'wszystkich' or n.author == user %}
+	<p><a href="archiwum/news/{{n.id}}">{{n.title|linebreaks}}</a></p>
+	<p>Dodana {{n.pub_date|date:"d.m.Y"}} o godz.: {{n.pub_date|date:"H:i"}} przez <b>{{n.author.first_name}} {{n.author.last_name}} {{n.author}}</b></p>
+{% endif %}
+{%empty%}
+	<div id="emptylist"><p>Brak pozycji na liście</p></div>
+	{%endfor%}
+</div>
+{% else %}
+{% if user_group == 'pracownik dziekanatu' %}
+<div id="content">
+<div id="actions">
+    <ul class="action_list">
+	<li>
+	    <a href="{%url archiwum.views.add_subject%}">Dodaj nowy przedmiot</a>
+                <a href="{%url archiwum.views.add_subject%}"><img src="{{MEDIA_URL}}images/manage_documents.png"
+	            alt="Dodaj nowy przedmiot" /></a></li>
+        <li>
+	<a href="{%url archiwum.views.register_user%}",>Dodaj studenta</a></li>
+	<li>
+	    <a href="{%url archiwum.views.search_documents%}">Wyszukuj dokumenty</a>
+	        <a href="{%url archiwum.views.search_documents%}"><img src="{{MEDIA_URL}}images/admin_panel.png"
+	    alt="Wyszukuj dokumenty"/></a></li>
+	<li>
+	    <a href="{%url archiwum.views.documents%}">Przeglądaj dokumenty</a>
+	        <a href="{%url archiwum.views.documents%}"><img src="{{  MEDIA_URL }}images/search_document.png" 
+                alt="Przeglądaj dokumenty"/></a></li>
+    <li>
+		<a href="{%url archiwum.views.newses%}">Przeglądaj i wyszukuj wiadomości</a>
+            <a href="{%url archiwum.views.newses%}"><img src="{{ MEDIA_URL}}images/search_news.png"
+                alt="Przeglądaj i wyszukuj wiadomości" /></a></li>
+	<li>
+		<a href="{%url archiwum.views.graphs%}">Plany zajęć</a>
+            <a href="{%url archiwum.views.graphs%}"><img src="{{ MEDIA_URL}}images/search_document.png"
+                alt="Plany zajęć" /></a></li>
+	<li>	
+        <a href="/archiwum/document/add/">Dodaj dokument</a>
+            <a href="/archiwum/document/add"><img src="{{ MEDIA_URL }}images/add_document.png"
+                alt="Dodaj dokument" /></a></li>
+	<li>
+	    <a href="/archiwum/news/add">Dodaj wiadomość</a>
+		    <a href="/archiwum/news/add"><img src="{{ MEDIA_URL }}images/add_news.png"
+		        alt="Dodaj wiadomość" /></a></li>
+    </ul>
+</div>
+</div>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze dokumenty</h1>
+	{%for document in documents%} Dla {{document.public.name}}
+	<p><a href="/documents/{{document.id}}">{{document.title|linebreaks}}</a></p>
+	<p>Dodany {{document.issued_on|date:"d.m.Y"}} o godz.: {{document.issued_on|date:"H:i"}} przez <b>{{document.author.first_name}} {{document.author.last_name}} {{document.author}}</b></p>
+	{%empty%}
+	<div id="emptylist"><p>Brak pozycji na liście</p></div>
+	{%endfor%}
+</div>
+<br>
+<div id="main_index_ost_dod">
+    <h1>Najnowsze wiadomości</h1>
+
+{%for n in news%}
+{% if n.public == 'dziekanatu' or n.public == 'wszystkich' or n.author == user %}
+	<p><a href="archiwum/news/{{n.id}}">{{n.title|linebreaks}}</a></p>
+	<p>Dodana {{n.pub_date|date:"d.m.Y"}} o godz.: {{n.pub_date|date:"H:i"}} przez <b>{{n.author.first_name}} {{n.author.last_name}} {{n.author}}</b></p>
+{% endif %}
+{%empty%}
+	<div id="emptylist"><p>Brak pozycji na liście</p></div>
+{%endfor%}
+</div>
+{% else %}{% if user_group == 'Administrator' %}
+<div id="content">
+<div id="actions">
+<div id="emptylist"><p>Nie jesteś w żadnej grupie. Brak akcji.</p></div>
+    <p>
+    <ul class="action_list">
+	<li><a href="/admin">Panel administracyjny</a>	
+	<a href="/admin">
+	    <img src="{{ MEDIA_URL }}images/admin_panel.png"
+		alt="Panel administracyjny"/></a></li>
+    </ul>	
+	</p>
+</div>
+</div>
+{% endif %}{%endif%}{%endif%}{% endif %} <!-- for debug end -->
+{% endblock %}

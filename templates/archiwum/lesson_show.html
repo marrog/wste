@@ -1,0 +1,21 @@
+{% extends "archiwum/layout.html" %}
+{% block title %} {{lesson.name}}| Dokumenty{%endblock%}
+{% block content %}
+<div id="lesson">
+<h3>Tytuł: {{lesson.name}}<h3>
+<span class="date">Przeprowadzono {{lesson.date}} </span>
+<h3>Przedmiot: {{lesson.subject}}</h3>
+<p><b>Liczba studentów obecnych na zajęciach: {{lesson.students.count}}</b></p>
+<p>Lista studentów: 
+<ul>
+{%for student in lesson.students.all%}
+<li>{{student.user.first_name}} {{student.user.last_name}} *#{{student.user.id}}</li>
+{%endfor%}
+</ul>
+<p class="postscript">*unikalny numer studenta</p>
+</p>
+
+
+<p></p>
+</div>
+{% endblock %}

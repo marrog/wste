@@ -1,0 +1,38 @@
+{% extends "archiwum/layout.html" %}
+{% block title %}Archiwum dokumentów | Dokumenty z kategorii "{{cat.name|upper}}"{%endblock%}
+{% block content %}
+<div id="documents">
+<h3>Dokumenty z kategorii "{{cat.name|upper}}":</h3>
+<br><br>
+{% for document in documents.object_list %}
+	<li><p><h3><a href="/documents/{{document.id}}">{{document.title}}</a></h3></p>
+    <p><h3>Opis:</h3></p>
+	<p>{{document.description }}</p></li>
+{% empty %}
+<h3>Brak dokumentów z tej kategorii!</h3>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if documents.has_previous %}
+            <a href="?page={{ documents.previous_page_number }}&search_text=">Poprzednia</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ documents.number }} z {{ documents.paginator.num_pages }}.
+        </span>
+
+        {% if documents.has_next %}
+            <a href="?page={{ documents.next_page_number }}&search_text=">Następna</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+<div id="sidebar">
+<h3>Kategorie</h3>
+    <ul class="categories">
+    {% for c in document_categories %}
+        <li><a href="/documents/cat/{{c.slug}}">{{c.name}}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock%}

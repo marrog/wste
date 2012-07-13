@@ -1,0 +1,122 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %} Archiwum dokumentów | Moje wiadomości{%endblock%}
+{%block content%}
+{% if user_group == 'student' %}
+<div id="newses">
+<div id="search">
+Szukaj:
+<form id="searchbox" action="" method="get" >
+<input type="text" name='q'></input>
+</form>
+</div>
+<br>
+<br>
+<h2>Moje wiadomości - wg daty publikacji:</h2>
+{% for news in newses.object_list %}
+{% if news.author == user or news.public == 'wszystkich' or news.public == 'studentów' %}
+	<div id="news">	<li><h3><a href="/archiwum/news/{{news.id}}">{{ news.title|escape|linebreaks }}</a></h3>
+		<span class="date">Opublikowana: {{ news.pub_date|date:"d.m.Y" }} o godz. {{news.pub_date|date:"H:i"}} przez {{ news.author.first_name }} {{news.author.last_name}} {{news.author}}</span>
+<h3>Treść:</h3><p>{{ news.text|escape|urlize|linebreaks }}</p></li></div>
+{% endif %}
+{% empty %}
+<br>
+	<h1><div id="emptylist">Brak wiadomości!</div></h1>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if newses.has_previous %}
+            <a href="?page={{ newses.previous_page_number }}">poprzednie</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ newses.number }} z {{ newses.paginator.num_pages }}
+        </span>
+
+        {% if newses.has_next %}
+            <a href="?page={{ newses.next_page_number }}">następne</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% else %}
+{% if user_group == 'instruktor' %}
+<div id="newses">
+<div id="search">
+Szukaj:
+<form id="searchbox" action="" method="get" >
+<input type="text" name='q'></input>
+</form>
+</div>
+<br>
+<br>
+<h2>Moje wiadomości - wg daty publikacji:</h2>
+{% for news in newses.object_list %}
+{% if news.author == user or news.public == 'wszystkich' or news.public == 'instruktorów' %}
+	<div id="news">	<li><h3><a href="/archiwum/news/{{news.id}}">{{ news.title|escape|linebreaks }}</a></h3>
+		<span class="date">Opublikowana: {{ news.pub_date|date:"d.m.Y" }} o godz. {{news.pub_date|date:"H:i"}} przez {{ news.author.first_name }} {{news.author.last_name}} {{news.author}}</span>
+<h3>Treść:</h3><p>{{ news.text|escape|urlize|linebreaks }}</p></li></div>
+{% endif %}
+{% empty %}
+<br>
+	<h1><div id="emptylist">Brak wiadomości!</div></h1>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if newses.has_previous %}
+            <a href="?page={{ newses.previous_page_number }}">poprzednie</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ newses.number }} z {{ newses.paginator.num_pages }}
+        </span>
+
+        {% if newses.has_next %}
+            <a href="?page={{ newses.next_page_number }}">następne</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% else %}
+{% if user_group == 'pracownik dziekanatu' %}
+<div id="newses">
+<div id="search">
+Szukaj:
+<form id="searchbox" action="" method="get" >
+<input type="text" name='q'></input>
+</form>
+</div>
+<br>
+<br>
+<h2>Moje wiadomości - wg daty publikacji:</h2>
+{% for news in newses.object_list %}
+{% if news.author == user or news.public == 'wszystkich' or news.public == 'dziekanatu' %}
+	<div id="news">	<li><h3><a href="/archiwum/news/{{news.id}}">{{ news.title|escape|linebreaks }}</a></h3>
+		<span class="date">Opublikowana: {{ news.pub_date|date:"d.m.Y" }} o godz. {{news.pub_date|date:"H:i"}} przez {{ news.author.first_name }} {{news.author.last_name}} {{news.author}}</span>
+<h3>Treść:</h3><p>{{ news.text|escape|urlize|linebreaks }}</p></li></div>
+{% endif %}
+{% empty %}
+<br>
+	<h1><div id="emptylist">Brak wiadomości!</div></h1>
+{% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if newses.has_previous %}
+            <a href="?page={{ newses.previous_page_number }}">poprzednie</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ newses.number }} z {{ newses.paginator.num_pages }}
+        </span>
+
+        {% if newses.has_next %}
+            <a href="?page={{ newses.next_page_number }}">następne</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% else %}
+<div id="content">
+<div id="emptylist">Nie jesteś w żadnej grupie. Brak informacji!</div>
+</div>
+{% endif %}{% endif %}{% endif %}
+{% endblock %}

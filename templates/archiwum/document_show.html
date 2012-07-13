@@ -1,0 +1,19 @@
+{% extends "archiwum/layout.html" %}
+{% block title %}Dokumenty | {{document.title}}{% endblock %}
+{% block content %}
+{% if "wszystkich" in document.public.name or policy_group in document.public.name %}
+<!--Powyższy warunek do napisania dobrze-->
+<div id="news">
+<h3>{{document.title}}</h3><br><br>
+{{document.description|linebreaks|urlize|safe}}<br><br>
+{% if document.dok %}<a href="{{ document.dok.url }}">Otwórz plik</a>{% endif %}<br><br>Rozmiar pliku: {#{{document.dok.size|filesizeformat}}#}
+<h2>Dodany {{document.issued_on|date:"d.m.Y"}} o godz. {{document.issued_on|date:"H:i"}}</h2>
+<h2>Autor: {{document.author.first_name}} {{document.author.last_name}} {{document.author}}</h2>
+<h2>Kategoria: {{document.category.name}}</h2>
+<h2>Typ: {{document.typ.name}}</h2>
+<h2>Opublikowany dla: {{document.public.name}}</h2>
+{% else %}
+<div id="emptylist"><p>Nie masz praw do oglądania tego dokumentu!</p></div>
+{% endif %}
+</div>
+{% endblock %}

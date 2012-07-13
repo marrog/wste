@@ -1,0 +1,19 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block content %}
+<h1>W celu opublikowania nowej wiadomości wypełnij poniższy formularz:</h1>
+<div id=formularze>
+<p>
+<form method="post" action="">{% csrf_token %}
+<dl>
+<dt><label for="id_public">Opublikuj dla</label></dt>
+<dd>{{ form.public }}</dd>
+<dt><label for="id_title">Tytuł wiadomości</label></dt>
+<dd>{{ form.title }}</dd>
+<dt><label for="id_text">Treść</label></dt>
+<dd>{{ form.text }}</dd>
+</dl>
+<input type="submit" value="Opublikuj wiadomość" />
+</form>
+</p>
+</div>
+{% endblock %}

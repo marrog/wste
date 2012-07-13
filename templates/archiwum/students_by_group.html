@@ -1,0 +1,30 @@
+﻿{% extends "archiwum/layout.html" %}
+{% block title %}Studenci z grupy "{{grupa.name}}"{%endblock%}
+{% block content %}
+<div id="content">
+<h1>Lista studentów z grupy "{{grupa.name}}" (wszystkich <div id="emptylist">{{counter}}</div>):</h1>
+<ul>
+{% for student in students.object_list %}
+<li><a href="/users/list/students/{{student.id}}">{{student.indeks}} {{student.first_name}} {{student.last_name}} {{student.surname}}</a></li>
+{% empty %}
+<br>
+<div id="emptylist">Brak studentów w tej grupie!</div>
+{% endfor %}
+</ul>
+<div class="pagination">
+    <span class="step-links">
+        {% if students.has_previous %}
+            <a href="?page={{ students.previous_page_number }}">poprzednie</a>
+        {% endif %}
+
+        <span class="current">
+            Strona {{ students.number }} z {{ students.paginator.num_pages }}.
+        </span>
+
+        {% if students.has_next %}
+            <a href="?page={{ students.next_page_number }}">następne</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}
